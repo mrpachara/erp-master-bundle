@@ -1,0 +1,53 @@
+Erp\Bundle\MasterBundle\Entity\Person:
+  type: entity
+  repositoryClass: Erp\Bundle\MasterBundle\Infrastructure\ORM\Repository\PersonRepository
+  table: master_person
+  inheritanceType: JOINED
+  oneToOne:
+    personData:
+      targetEntity: Erp\Bundle\ObjectValueBundle\Entity\PersonData
+      orphanRemoval: true
+      # cascade: ["persist", "merge"]
+      joinColumns:
+        joinColumn:
+          name: id_objectvalue_persondata
+          nullable: false
+          unique: true
+          OnDelete: RESTRICT
+    address:
+      targetEntity: Erp\Bundle\ObjectValueBundle\Entity\Address
+      orphanRemoval: true
+      cascade: ["persist", "merge"]
+      joinColumns:
+        joinColumn:
+          name: id_objectvalue_address
+          nullable: false
+          unique: true
+          OnDelete: RESTRICT
+  manyToMany:
+    bankAccounts:
+      targetEntity: Erp\Bundle\ObjectValueBundle\Entity\BankAccount
+      orphanRemoval: true
+      cascade: ["persist", "merge"]
+      joinTable:
+        name: master_person_bankaccount
+        joinColumns:
+          joinColumn:
+            name: id_master_person
+            nullable: false
+            onDelete: CASCADE
+        inverseJoinColumns:
+          joinColumn:
+            name: id_objectvalue_bankaccount
+            nullable: false
+            unique: true
+            OnDelete: RESTRICT
+  fields:
+    phone:
+      type: string
+      length: 32
+      nullable: false
+    fax:
+      type: string
+      length: 32
+      nullable: false

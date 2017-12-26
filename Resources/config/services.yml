@@ -1,0 +1,28 @@
+services:
+#    erp_master.example:
+#        class: Erp\Bundle\MasterBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
+  #CQRS
+  erp_master.cqrs.costitem:
+    class: Erp\Bundle\CoreBundle\Domain\CQRS\CQRSContainer
+    arguments:
+      - "@=service('doctrine').getRepository('ErpMasterBundle:CostItem')"
+      - "@=service('doctrine').getRepository('ErpMasterBundle:CostItem')"
+
+  erp_master.cqrs.person:
+    class: Erp\Bundle\CoreBundle\Domain\CQRS\CQRSContainer
+    arguments:
+      - "@=service('doctrine').getRepository('ErpMasterBundle:Person')"
+      - ~
+
+  erp_master.cqrs.person_individual:
+    class: Erp\Bundle\CoreBundle\Domain\CQRS\CQRSContainer
+    arguments:
+      - "@=service('doctrine').getRepository('ErpMasterBundle:PersonIndividual')"
+      - "@=service('doctrine').getRepository('ErpMasterBundle:PersonIndividual')"
+
+  erp_master.cqrs.person_corporate:
+    class: Erp\Bundle\CoreBundle\Domain\CQRS\CQRSContainer
+    arguments:
+      - "@=service('doctrine').getRepository('ErpMasterBundle:PersonCorporate')"
+      - "@=service('doctrine').getRepository('ErpMasterBundle:PersonCorporate')"

@@ -1,0 +1,22 @@
+Erp\Bundle\MasterBundle\Entity\CostItem:
+  type: entity
+  repositoryClass: Erp\Bundle\MasterBundle\Infrastructure\ORM\Repository\CostItemRepository
+  table: master_costitem
+  inheritanceType: JOINED
+  fields:
+    type:
+      type: string
+      length: 32
+      nullable: false
+    unit:
+      type: string
+      length: 128
+      nullable: false
+    price:
+      type: decimal
+      precision: 10
+      scale: 2
+      nullable: false
+    description:
+      type: text
+      nullable: true

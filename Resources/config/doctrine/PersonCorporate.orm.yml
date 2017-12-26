@@ -1,0 +1,35 @@
+Erp\Bundle\MasterBundle\Entity\PersonCorporate:
+  type: entity
+  repositoryClass: Erp\Bundle\MasterBundle\Infrastructure\ORM\Repository\PersonCorporateRepository
+  table: master_personcorporate
+  inheritanceType: JOINED
+  # oneToOne:
+  associationOverride:
+    personData:
+      targetEntity: Erp\Bundle\ObjectValueBundle\Entity\Corporate
+      # orphanRemoval: true
+      cascade: ["persist", "merge"]
+      # joinColumns:
+      #   joinColumn:
+      #     name: id_objectvalue_persondata
+      #     nullable: false
+      #     unique: true
+      #     OnDelete: RESTRICT
+  manyToMany:
+    contacts:
+      targetEntity: Erp\Bundle\ObjectValueBundle\Entity\Contact
+      orphanRemoval: true
+      cascade: ["persist", "merge"]
+      joinTable:
+        name: master_personcorporate_contact
+        joinColumns:
+          joinColumn:
+            name: id_master_personindividual
+            nullable: false
+            onDelete: CASCADE
+        inverseJoinColumns:
+          joinColumn:
+            name: id_objectvalue_contact
+            nullable: false
+            unique: true
+            OnDelete: RESTRICT

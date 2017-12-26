@@ -1,0 +1,5 @@
+Erp\Bundle\MasterBundle\Entity\PersonCoporate:
+  access_type: property
+  properties:
+    contacts:
+      type: Erp\Bundle\CoreBundle\Collection\ArrayCollection<Erp\Bundle\ObjectValueBundle\Entity\Contact>

@@ -1,0 +1,5 @@
+Erp\Bundle\MasterBundle\Entity\Person:
+  access_type: property
+  properties:
+    bankAccounts:
+      type: Erp\Bundle\CoreBundle\Collection\ArrayCollection<Erp\Bundle\ObjectValueBundle\Entity\BankAccount>
