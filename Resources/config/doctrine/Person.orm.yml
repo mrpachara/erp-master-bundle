@@ -1,19 +1,19 @@
 Erp\Bundle\MasterBundle\Entity\Person:
   type: entity
-  repositoryClass: Erp\Bundle\MasterBundle\Infrastructure\ORM\Repository\PersonRepository
+  #repositoryClass: Erp\Bundle\MasterBundle\Infrastructure\ORM\Repository\PersonRepository
   table: master_person
   inheritanceType: JOINED
   oneToOne:
     personData:
       targetEntity: Erp\Bundle\ObjectValueBundle\Entity\PersonData
       orphanRemoval: true
-      # cascade: ["persist", "merge"]
+      cascade: ["persist", "merge"]
       joinColumns:
         joinColumn:
           name: id_objectvalue_persondata
           nullable: false
           unique: true
-          OnDelete: RESTRICT
+          onDelete: RESTRICT
     address:
       targetEntity: Erp\Bundle\ObjectValueBundle\Entity\Address
       orphanRemoval: true
@@ -23,7 +23,17 @@ Erp\Bundle\MasterBundle\Entity\Person:
           name: id_objectvalue_address
           nullable: false
           unique: true
-          OnDelete: RESTRICT
+          onDelete: RESTRICT
+    contact:
+      targetEntity: Erp\Bundle\ObjectValueBundle\Entity\Contact
+      orphanRemoval: true
+      cascade: ["persist", "merge"]
+      joinColumns:
+        joinColumn:
+          name: id_objectvalue_contact
+          nullable: false
+          unique: true
+          onDelete: RESTRICT
   manyToMany:
     bankAccounts:
       targetEntity: Erp\Bundle\ObjectValueBundle\Entity\BankAccount
@@ -41,13 +51,13 @@ Erp\Bundle\MasterBundle\Entity\Person:
             name: id_objectvalue_bankaccount
             nullable: false
             unique: true
-            OnDelete: RESTRICT
+            onDelete: RESTRICT
   fields:
     phone:
       type: string
       length: 32
-      nullable: false
+      nullable: true
     fax:
       type: string
       length: 32
-      nullable: false
+      nullable: true

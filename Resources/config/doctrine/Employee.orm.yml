@@ -1,0 +1,14 @@
+Erp\Bundle\MasterBundle\Entity\Employee:
+  type: entity
+  #repositoryClass: Erp\Bundle\MasterBundle\Infrastructure\ORM\Repository\EmployeeRepository
+  table: master_employee
+  inheritanceType: JOINED
+  manyToOne:
+    individual:
+      targetEntity: Erp\Bundle\MasterBundle\Entity\PersonIndividual
+      #cascade: ["persist", "refresh"]
+      joinColumn:
+        name: id_master_person_individual
+        nullable: false
+        onDelete: RESTRICT
+      fetch: EAGER

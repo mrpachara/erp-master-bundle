@@ -1,0 +1,18 @@
+Erp\Bundle\MasterBundle\Entity\ProjectBoq:
+  type: entity
+  #repositoryClass: Erp\Bundle\MasterBundle\Infrastructure\ORM\Repository\ProjectBoqRepository
+  table: master_projectboq
+  inheritanceType: JOINED
+  manyToOne:
+    project:
+      targetEntity: Project
+      joinColumn:
+        name: id_master_project
+        nullable: false
+        onDelete: RESTRICT
+      fetch: EAGER
+  oneToMany:
+    budgetTypes:
+      targetEntity: ProjectBoqBudgetType
+      cascade: ["persist", "refresh"]
+      mappedBy: boq

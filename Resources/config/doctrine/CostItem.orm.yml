@@ -1,6 +1,6 @@
 Erp\Bundle\MasterBundle\Entity\CostItem:
   type: entity
-  repositoryClass: Erp\Bundle\MasterBundle\Infrastructure\ORM\Repository\CostItemRepository
+  #repositoryClass: Erp\Bundle\MasterBundle\Infrastructure\ORM\Repository\CostItemRepository
   table: master_costitem
   inheritanceType: JOINED
   fields:

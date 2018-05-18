@@ -1,0 +1,96 @@
+Erp\Bundle\MasterBundle\Entity\Project:
+  type: entity
+  #repositoryClass: Erp\Bundle\MasterBundle\Infrastructure\ORM\Repository\ProjectRepository
+  table: master_project
+  inheritanceType: JOINED
+  manyToOne:
+    owner:
+      targetEntity: Erp\Bundle\MasterBundle\Entity\Person
+      joinColumn:
+        name: id_master_person
+        nullable: false
+        onDelete: RESTRICT
+      fetch: EAGER
+  oneToOne:
+    address:
+      targetEntity: Erp\Bundle\ObjectValueBundle\Entity\Address
+      orphanRemoval: true
+      cascade: ["persist", "merge"]
+      joinColumns:
+        joinColumn:
+          name: id_objectvalue_address
+          nullable: false
+          unique: true
+          onDelete: RESTRICT
+    addressProject:
+      targetEntity: Erp\Bundle\ObjectValueBundle\Entity\Address
+      orphanRemoval: true
+      cascade: ["persist", "merge"]
+      joinColumns:
+        joinColumn:
+          name: id_objectvalue_address_project
+          nullable: true
+          unique: true
+          onDelete: RESTRICT
+  manyToMany:
+    contacts:
+      targetEntity: Erp\Bundle\ObjectValueBundle\Entity\Contact
+      orphanRemoval: true
+      cascade: ["persist", "merge"]
+      joinTable:
+        name: master_project_contact
+        joinColumns:
+          joinColumn:
+            name: id_master_project
+            nullable: false
+            onDelete: CASCADE
+        inverseJoinColumns:
+          joinColumn:
+            name: id_objectvalue_contact
+            nullable: false
+            unique: true
+            onDelete: RESTRICT
+    bankAccounts:
+      targetEntity: Erp\Bundle\ObjectValueBundle\Entity\BankAccount
+      cascade: ["persist", "merge"]
+      joinTable:
+        name: master_project_bankaccount
+        joinColumns:
+          joinColumn:
+            name: id_master_project
+            nullable: false
+            onDelete: CASCADE
+        inverseJoinColumns:
+          joinColumn:
+            name: id_objectvalue_bankaccount
+            nullable: false
+            onDelete: RESTRICT
+    workers:
+      targetEntity: Erp\Bundle\MasterBundle\Entity\Employee
+      joinTable:
+        name: master_project_worker
+        joinColumns:
+          joinColumn:
+            name: id_master_project
+            nullable: false
+            onDelete: CASCADE
+        inverseJoinColumns:
+          joinColumn:
+            name: id_master_employee
+            nullable: false
+            onDelete: RESTRICT
+  fields:
+    phone:
+      type: string
+      length: 32
+      nullable: true
+    fax:
+      type: string
+      length: 32
+      nullable: true
+    startDate:
+      type: date_immutable
+      nullable: true
+    finishDate:
+      type: date_immutable
+      nullable: true

@@ -1,0 +1,5 @@
+Erp\Bundle\MasterBundle\Entity\Vendor:
+  access_type: property
+  properties:
+    owner:
+      type: Erp\Bundle\MasterBundle\Entity\Person

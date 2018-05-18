@@ -1,6 +1,6 @@
 Erp\Bundle\MasterBundle\Entity\PersonCorporate:
   type: entity
-  repositoryClass: Erp\Bundle\MasterBundle\Infrastructure\ORM\Repository\PersonCorporateRepository
+  #repositoryClass: Erp\Bundle\MasterBundle\Infrastructure\ORM\Repository\PersonCorporateRepository
   table: master_personcorporate
   inheritanceType: JOINED
   # oneToOne:
@@ -8,13 +8,13 @@ Erp\Bundle\MasterBundle\Entity\PersonCorporate:
     personData:
       targetEntity: Erp\Bundle\ObjectValueBundle\Entity\Corporate
       # orphanRemoval: true
-      cascade: ["persist", "merge"]
+      # cascade: ["persist", "merge"]
       # joinColumns:
       #   joinColumn:
       #     name: id_objectvalue_persondata
       #     nullable: false
       #     unique: true
-      #     OnDelete: RESTRICT
+      #     onDelete: RESTRICT
   manyToMany:
     contacts:
       targetEntity: Erp\Bundle\ObjectValueBundle\Entity\Contact
@@ -32,4 +32,4 @@ Erp\Bundle\MasterBundle\Entity\PersonCorporate:
             name: id_objectvalue_contact
             nullable: false
             unique: true
-            OnDelete: RESTRICT
+            onDelete: RESTRICT

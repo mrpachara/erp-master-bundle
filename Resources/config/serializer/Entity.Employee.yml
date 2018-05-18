@@ -1,0 +1,5 @@
+Erp\Bundle\MasterBundle\Entity\Employee:
+  access_type: property
+  properties:
+    individual:
+      type: Erp\Bundle\MasterBundle\Entity\PersonIndividual

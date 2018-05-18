@@ -33,12 +33,12 @@ class PersonCorporate extends Person {
   public function __construct(Thing $thing = null) {
     parent::__construct($thing);
 
-    $this->personData = new Corporate();
+    //$this->personData = new Corporate();
     $this->contacts = new ArrayCollection();
   }
 
   /**
-   * @return ArrayCollection
+   * @return Contact[]
    */
   public function getContacts()
   {

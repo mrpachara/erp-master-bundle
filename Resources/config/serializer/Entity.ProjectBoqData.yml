@@ -1,0 +1,18 @@
+Erp\Bundle\MasterBundle\Entity\ProjectBoqData:
+  access_type: property
+  properties:
+    parent:
+      exclude: true
+      #type: Erp\Bundle\MasterBundle\Entity\ProjectBoqData
+      #max_depth: 1
+    children:
+      type: Erp\Bundle\CoreBundle\Collection\ArrayCollection<Erp\Bundle\MasterBundle\Entity\ProjectBoqData>
+    budgets:
+      type: Erp\Bundle\CoreBundle\Collection\ArrayCollection<string, Erp\Bundle\MasterBundle\Entity\ProjectBoqDataBudget>
+  virtual_properties:
+    getFullNames:
+      serialized_name: fullNames
+      type: array
+    # getTotalBudget:
+    #   serialized_name: totalBudget
+    #   type: string

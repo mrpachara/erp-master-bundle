@@ -1,0 +1,10 @@
+Erp\Bundle\MasterBundle\Entity\ProjectBoqObjectValue:
+  type: entity
+  #repositoryClass: Erp\Bundle\MasterBundle\Infrastructure\ORM\Repository\ProjectBoqObjectValueRepository
+  table: master_projectboqobjectvalue
+  inheritanceType: JOINED
+  id:
+    id:
+      type: bigint
+      generator:
+        strategy: IDENTITY

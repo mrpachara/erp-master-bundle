@@ -1,28 +1,105 @@
+parameters:
+    container.autowiring.strict_mode: true
+
 services:
-#    erp_master.example:
-#        class: Erp\Bundle\MasterBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
-  #CQRS
-  erp_master.cqrs.costitem:
-    class: Erp\Bundle\CoreBundle\Domain\CQRS\CQRSContainer
-    arguments:
-      - "@=service('doctrine').getRepository('ErpMasterBundle:CostItem')"
-      - "@=service('doctrine').getRepository('ErpMasterBundle:CostItem')"
 
-  erp_master.cqrs.person:
-    class: Erp\Bundle\CoreBundle\Domain\CQRS\CQRSContainer
-    arguments:
-      - "@=service('doctrine').getRepository('ErpMasterBundle:Person')"
-      - ~
+  _defaults:
+    # automatically injects dependencies in your services
+    autowire: true
+    # automatically registers your services as commands, event subscribers, etc.
+    autoconfigure: true
+    # this means you cannot fetch services directly from the container via $container->get()
+    # if you need to do this, you can override this setting on individual services
+    public: false
 
-  erp_master.cqrs.person_individual:
-    class: Erp\Bundle\CoreBundle\Domain\CQRS\CQRSContainer
-    arguments:
-      - "@=service('doctrine').getRepository('ErpMasterBundle:PersonIndividual')"
-      - "@=service('doctrine').getRepository('ErpMasterBundle:PersonIndividual')"
+  Erp\Bundle\MasterBundle\:
+    resource: '../../*'
+    # you can exclude directories or files
+    # but if a service is unused, it's removed anyway
+    exclude: '../../{Collection,Entity,Infrastructure/ORM/Repository}'
 
-  erp_master.cqrs.person_corporate:
-    class: Erp\Bundle\CoreBundle\Domain\CQRS\CQRSContainer
-    arguments:
-      - "@=service('doctrine').getRepository('ErpMasterBundle:PersonCorporate')"
-      - "@=service('doctrine').getRepository('ErpMasterBundle:PersonCorporate')"
+  Erp\Bundle\MasterBundle\Controller\:
+    resource: '../../Controller'
+    tags: ['controller.service_arguments']
+
+  # doamin query
+
+  #--------- command --------------
+  # erp_master.service.command.general:
+  #   class: Erp\Bundle\CoreBundle\Infrastructure\ORM\Service\GeneralCommandService
+  #   arguments:
+  #     - "@doctrine.orm.default_entity_manager"
+  #
+  # Erp\Bundle\MasterBundle\Infrastructure\ORM\Service\CostItemCommandHandlerService:
+  #   arguments:
+  #     - "@doctrine.orm.default_entity_manager"
+  #
+  # Erp\Bundle\MasterBundle\Infrastructure\ORM\Service\CostItemTypeRefCommandHandlerService:
+  #   arguments:
+  #     - "@doctrine.orm.default_entity_manager"
+  #
+  # Erp\Bundle\MasterBundle\Infrastructure\ORM\Service\PersonCommandHandlerService:
+  #   arguments:
+  #     - "@doctrine.orm.default_entity_manager"
+  #
+  # Erp\Bundle\MasterBundle\Infrastructure\ORM\Service\EmployeeCommandHandlerService:
+  #   arguments:
+  #     - "@doctrine.orm.default_entity_manager"
+  #
+  # Erp\Bundle\MasterBundle\Infrastructure\ORM\Service\VendorCommandHandlerService:
+  #   arguments:
+  #     - "@doctrine.orm.default_entity_manager"
+  #
+  # Erp\Bundle\MasterBundle\Infrastructure\ORM\Service\ProjectCommandHandlerService:
+  #   arguments:
+  #     - "@doctrine.orm.default_entity_manager"
+  #
+  # Erp\Bundle\MasterBundle\Infrastructure\ORM\Service\ProjectBoqCommandHandlerService:
+  #   arguments:
+  #     - "@doctrine.orm.default_entity_manager"
+  #
+  # # command alias
+  # Erp\Bundle\MasterBundle\Domain\CQRS\CostItemCommandHandler: '@Erp\Bundle\MasterBundle\Infrastructure\ORM\Service\CostItemCommandHandlerService'
+  # Erp\Bundle\MasterBundle\Domain\CQRS\CostItemTypeRefCommandHandler: '@Erp\Bundle\MasterBundle\Infrastructure\ORM\Service\CostItemTypeRefCommandHandlerService'
+  # Erp\Bundle\MasterBundle\Domain\CQRS\PersonCommandHandler: '@Erp\Bundle\MasterBundle\Infrastructure\ORM\Service\PersonCommandHandlerService'
+  # Erp\Bundle\MasterBundle\Domain\CQRS\EmployeeCommandHandler: '@Erp\Bundle\MasterBundle\Infrastructure\ORM\Service\EmployeeCommandHandlerService'
+  # Erp\Bundle\MasterBundle\Domain\CQRS\VendorCommandHandler: '@Erp\Bundle\MasterBundle\Infrastructure\ORM\Service\VendorCommandHandlerService'
+  # Erp\Bundle\MasterBundle\Domain\CQRS\ProjectCommandHandler: '@Erp\Bundle\MasterBundle\Infrastructure\ORM\Service\ProjectCommandHandlerService'
+  # Erp\Bundle\MasterBundle\Domain\CQRS\ProjectBoqCommandHandler: '@Erp\Bundle\MasterBundle\Infrastructure\ORM\Service\ProjectBoqCommandHandlerService'
+
+  # domain query
+  Erp\Bundle\MasterBundle\Domain\CQRS\CostItemQuery: '@Erp\Bundle\MasterBundle\Infrastructure\ORM\Service\CostItemQueryService'
+  Erp\Bundle\MasterBundle\Domain\CQRS\CostItemTypeRefQuery: '@Erp\Bundle\MasterBundle\Infrastructure\ORM\Service\CostItemTypeRefQueryService'
+  Erp\Bundle\MasterBundle\Domain\CQRS\PersonQuery: '@Erp\Bundle\MasterBundle\Infrastructure\ORM\Service\PersonQueryService'
+  Erp\Bundle\MasterBundle\Domain\CQRS\PersonIndividualQuery: '@Erp\Bundle\MasterBundle\Infrastructure\ORM\Service\PersonIndividualQueryService'
+  Erp\Bundle\MasterBundle\Domain\CQRS\PersonCorporateQuery: '@Erp\Bundle\MasterBundle\Infrastructure\ORM\Service\PersonCorporateQueryService'
+  Erp\Bundle\MasterBundle\Domain\CQRS\EmployeeQuery: '@Erp\Bundle\MasterBundle\Infrastructure\ORM\Service\EmployeeQueryService'
+  Erp\Bundle\MasterBundle\Domain\CQRS\VendorQuery: '@Erp\Bundle\MasterBundle\Infrastructure\ORM\Service\VendorQueryService'
+  Erp\Bundle\MasterBundle\Domain\CQRS\ProjectQuery: '@Erp\Bundle\MasterBundle\Infrastructure\ORM\Service\ProjectQueryService'
+  Erp\Bundle\MasterBundle\Domain\CQRS\ProjectBoqQuery: '@Erp\Bundle\MasterBundle\Infrastructure\ORM\Service\ProjectBoqQueryService'
+
+  #Entity Listerner
+  Erp\Bundle\MasterBundle\Infrastructure\ORM\Listener\PersonListener:
+    #class: Erp\Bundle\MasterBundle\Infrastructure\ORM\Listener\PersonListener
+    tags:
+      - { name: doctrine.orm.entity_listener, entity: Erp\Bundle\MasterBundle\Entity\Person, event: preFlush }
+
+  Erp\Bundle\MasterBundle\Infrastructure\ORM\Listener\EmployeeListener:
+    #class: Erp\Bundle\MasterBundle\Infrastructure\ORM\Listener\EmployeeListener
+    tags:
+      - { name: doctrine.orm.entity_listener, entity: Erp\Bundle\MasterBundle\Entity\Employee, event: preFlush }
+
+  Erp\Bundle\MasterBundle\Infrastructure\ORM\Listener\VendorListener:
+    #class: Erp\Bundle\MasterBundle\Infrastructure\ORM\Listener\VendorListener
+    tags:
+      - { name: doctrine.orm.entity_listener, entity: Erp\Bundle\MasterBundle\Entity\Vendor, event: preFlush }
+
+  Erp\Bundle\MasterBundle\Infrastructure\ORM\Listener\ProjectListener:
+    #class: Erp\Bundle\MasterBundle\Infrastructure\ORM\Listener\ProjectListener
+    tags:
+      - { name: doctrine.orm.entity_listener, entity: Erp\Bundle\MasterBundle\Entity\Project, event: preFlush }
+
+  Erp\Bundle\MasterBundle\Infrastructure\ORM\Listener\ProjectBoqListener:
+    #class: Erp\Bundle\MasterBundle\Infrastructure\ORM\Listener\ProjectBoqListener
+    tags:
+      - { name: doctrine.orm.entity_listener, entity: Erp\Bundle\MasterBundle\Entity\ProjectBoq, event: preFlush }

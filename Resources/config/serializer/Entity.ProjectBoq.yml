@@ -1,0 +1,7 @@
+Erp\Bundle\MasterBundle\Entity\ProjectBoq:
+  access_type: property
+  properties:
+    project:
+      type: Erp\Bundle\MasterBundle\Entity\Project
+    budgetTypes:
+      type: Erp\Bundle\CoreBundle\Collection\ArrayCollection<Erp\Bundle\MasterBundle\Entity\ProjectBoqBudgetType>

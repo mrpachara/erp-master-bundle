@@ -1,0 +1,9 @@
+Erp\Bundle\MasterBundle\Entity\ProjectBoqDataBudget:
+  access_type: property
+  properties:
+    boqData:
+      type: Erp\Bundle\MasterBundle\Entity\ProjectBoqData
+    boqBudgetType:
+      type: Erp\Bundle\MasterBundle\Entity\ProjectBoqBudgetType
+    budget:
+      type: string

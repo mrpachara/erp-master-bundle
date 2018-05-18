@@ -1,0 +1,37 @@
+<?php
+
+namespace Erp\Bundle\MasterBundle\Controller;
+
+use JMS\DiExtraBundle\Annotation as DI;
+use FOS\RestBundle\Controller\Annotations as Rest;
+
+/**
+ * PersonCorporate Api Controller
+ *
+ * @Rest\Version("1.0")
+ * @Rest\Route("/api/person-corporate")
+ */
+class PersonCorporateApiQueryController extends PersonApiQuery
+{
+    /**
+     * @var \Erp\Bundle\MasgerBundle\Authorization\PersonCorporateAuthorization
+     */
+    protected $authorization = null;
+
+    /** @required */
+    public function setAuthorization(\Erp\Bundle\MasterBundle\Authorization\PersonCorporateAuthorization $authorization)
+    {
+        $this->authorization = $authorization;
+    }
+
+    /**
+     * @var \Erp\Bundle\MasterBundle\Domain\CQRS\PersonCorporateQuery
+     */
+    protected $domainQuery;
+
+    /** @required */
+    public function setDomainQuery(\Erp\Bundle\MasterBundle\Domain\CQRS\PersonCorporateQuery $domainQuery)
+    {
+        $this->domainQuery = $domainQuery;
+    }
+}

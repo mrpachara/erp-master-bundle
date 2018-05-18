@@ -24,6 +24,6 @@ class PersonIndividual extends Person {
   public function __construct(Thing $thing = null) {
     parent::__construct($thing);
 
-    $this->personData = new Citizen();
+    //$this->personData = new Citizen();
   }
 }

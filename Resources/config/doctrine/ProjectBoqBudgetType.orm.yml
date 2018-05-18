@@ -1,0 +1,23 @@
+Erp\Bundle\MasterBundle\Entity\ProjectBoqBudgetType:
+  type: entity
+  #repositoryClass: Erp\Bundle\MasterBundle\Infrastructure\ORM\Repository\ProjectBoqBudgetTypeRepository
+  table: master_projectboqbudgettype
+  inheritanceType: JOINED
+  fields:
+    code:
+      type: string
+      length: 64
+      nullable: false
+    name:
+      type: string
+      length: 256
+      nullable: false
+  manyToOne:
+    boq:
+      targetEntity: ProjectBoq
+      inversedBy: budgetTypes
+      joinColumn:
+        name: id_master_projectboq
+        nullable: false
+        onDelete: CASCADE
+      fetch: EAGER

@@ -1,0 +1,9 @@
+Erp\Bundle\MasterBundle\Entity\ProjectBoqBudgetType:
+  access_type: property
+  properties:
+    boq:
+      exclude: true
+    _code:
+      type: string
+      accessor:
+        getter: get_code

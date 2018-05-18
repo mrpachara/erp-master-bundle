@@ -29,20 +29,6 @@ abstract class Person extends CoreAccount {
   protected $address;
 
   /**
-   * contact
-   *
-   * @var Contact
-   */
-  protected $contact;
-
-  /**
-   * bank accounts
-   *
-   * @var ArrayCollection
-   */
-  protected $bankAccounts;
-
-  /**
    * phone
    *
    * @var string
@@ -57,6 +43,20 @@ abstract class Person extends CoreAccount {
   protected $fax;
 
   /**
+   * contact
+   *
+   * @var Contact
+   */
+  protected $contact;
+
+  /**
+   * bank accounts
+   *
+   * @var ArrayCollection
+   */
+  protected $bankAccounts;
+
+  /**
    * constructor
    *
    * @param Thing|null $thing
@@ -64,8 +64,8 @@ abstract class Person extends CoreAccount {
   public function __construct(Thing $thing = null) {
     parent::__construct($thing);
 
-    $this->address = new Address();
-    $this->contact = new Contact();
+    //$this->address = new Address();
+    //$this->contact = new Contact();
     $this->bankAccounts = new ArrayCollection();
   }
 
@@ -104,6 +104,44 @@ abstract class Person extends CoreAccount {
   public function setAddress(Address $address)
   {
     $this->address = $address;
+    return $this;
+  }
+
+  /**
+   * @return string
+   */
+  public function getPhone()
+  {
+    return $this->phone;
+  }
+
+  /**
+   * @param string $phone
+   *
+   * @return static
+   */
+  public function setPhone($phone)
+  {
+    $this->phone = $phone;
+    return $this;
+  }
+
+  /**
+   * @return string
+   */
+  public function getFax()
+  {
+    return $this->fax;
+  }
+
+  /**
+   * @param string $fax
+   *
+   * @return static
+   */
+  public function setFax($fax)
+  {
+    $this->fax = $fax;
     return $this;
   }
 
@@ -155,43 +193,5 @@ abstract class Person extends CoreAccount {
    */
   public function removeBankAccount(BankAccount $bankAccount){
       $this->bankAccounts->removeElement($bankAccount);
-  }
-
-  /**
-   * @return string
-   */
-  public function getPhone()
-  {
-    return $this->phone;
-  }
-
-  /**
-   * @param string $phone
-   *
-   * @return static
-   */
-  public function setPhone($phone)
-  {
-    $this->phone = $phone;
-    return $this;
-  }
-
-  /**
-   * @return string
-   */
-  public function getFax()
-  {
-    return $this->fax;
-  }
-
-  /**
-   * @param string $fax
-   *
-   * @return static
-   */
-  public function setFax($fax)
-  {
-    $this->fax = $fax;
-    return $this;
   }
 }

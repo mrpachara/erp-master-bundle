@@ -1,0 +1,9 @@
+Erp\Bundle\MasterBundle\Entity\CostItemObjectValue:
+  type: entity
+  table: master_costitemobjectvalue
+  inheritanceType: JOINED
+  id:
+    id:
+      type: bigint
+      generator:
+        strategy: IDENTITY

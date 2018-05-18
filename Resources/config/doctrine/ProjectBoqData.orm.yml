@@ -1,0 +1,34 @@
+Erp\Bundle\MasterBundle\Entity\ProjectBoqData:
+  type: entity
+  #repositoryClass: Erp\Bundle\MasterBundle\Infrastructure\ORM\Repository\ProjectBoqDataRepository
+  table: master_projectboqdata
+  inheritanceType: JOINED
+  fields:
+    name:
+      type: string
+      length: 256
+      nullable: false
+    position:
+      type: integer
+      nullable: true
+  manyToOne:
+    parent:
+      targetEntity: ProjectBoqData
+      inversedBy: children
+      joinColumn:
+        name: id_master_projectboqdata
+        nullable: true
+        onDelete: CASCADE
+      fetch: EAGER
+  oneToMany:
+    children:
+      targetEntity: ProjectBoqData
+      cascade: ["persist", "refresh"]
+      mappedBy: parent
+      orderBy:
+        position: ASC
+    budgets:
+      targetEntity: ProjectBoqDataBudget
+      cascade: ["persist", "refresh"]
+      mappedBy: boqData
+      indexBy: id_master_projectboqbudgettype

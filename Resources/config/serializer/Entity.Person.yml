@@ -1,5 +1,11 @@
 Erp\Bundle\MasterBundle\Entity\Person:
   access_type: property
   properties:
+    personData:
+      type: Erp\Bundle\ObjectValueBundle\Entity\PersonData
     bankAccounts:
       type: Erp\Bundle\CoreBundle\Collection\ArrayCollection<Erp\Bundle\ObjectValueBundle\Entity\BankAccount>
+    contact:
+      type: Erp\Bundle\ObjectValueBundle\Entity\Contact
+    address:
+      type: Erp\Bundle\ObjectValueBundle\Entity\Address

@@ -1,0 +1,19 @@
+Erp\Bundle\MasterBundle\Entity\Project:
+  access_type: property
+  properties:
+    owner:
+      type: Erp\Bundle\MasterBundle\Entity\Person
+    addressProject:
+      type: Erp\Bundle\ObjectValueBundle\Entity\Address
+    address:
+      type: Erp\Bundle\ObjectValueBundle\Entity\Address
+    contacts:
+      type: Erp\Bundle\CoreBundle\Collection\ArrayCollection<Erp\Bundle\ObjectValueBundle\Entity\Contact>
+    bankAccounts:
+      type: Erp\Bundle\CoreBundle\Collection\ArrayCollection<Erp\Bundle\ObjectValueBundle\Entity\BankAccount>
+    workers:
+      type: Erp\Bundle\CoreBundle\Collection\ArrayCollection<Erp\Bundle\MasterBundle\Entity\Employee>
+    startDate:
+      type: DateTimeImmutable
+    finishDate:
+      type: DateTimeImmutable

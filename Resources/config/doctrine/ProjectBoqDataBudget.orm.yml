@@ -1,0 +1,28 @@
+Erp\Bundle\MasterBundle\Entity\ProjectBoqDataBudget:
+  type: entity
+  #repositoryClass: Erp\Bundle\MasterBundle\Infrastructure\ORM\Repository\ProjectBoqDataBudgetRepository
+  table: master_projectboqdatabudget
+  #TODO: add some constrain to prevent duplicate budgettype
+  inheritanceType: JOINED
+  fields:
+    budget:
+      type: decimal
+      precision: 10
+      scale: 2
+      nullable: false
+  manyToOne:
+    boqData:
+      targetEntity: ProjectBoqData
+      joinColumn:
+        name: id_master_projectboqdata
+        nullable: false
+        onDelete: CASCADE
+      fetch: EAGER
+      inversedBy: budgets
+    boqBudgetType:
+      targetEntity: ProjectBoqBudgetType
+      joinColumn:
+        name: id_master_projectboqbudgettype
+        nullable: false
+        onDelete: CASCADE
+      fetch: EAGER
