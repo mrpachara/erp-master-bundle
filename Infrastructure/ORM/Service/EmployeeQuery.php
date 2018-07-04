@@ -10,7 +10,8 @@ abstract class EmployeeQuery extends ParentQuery implements QueryInterface
     public function searchOptions() {
         $result = parent::searchOptions();
 
-        $result['search']['fields'][] = 'individual.contact.alias';
+        //$result['term']['fields'][] = 'individual.personData.code';
+        $result['term']['fields'][] = 'individual.contact.alias';
 
         return $result;
     }

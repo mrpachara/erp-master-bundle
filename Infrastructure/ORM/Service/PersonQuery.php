@@ -7,4 +7,10 @@ use Erp\Bundle\CoreBundle\Infrastructure\ORM\Service\CoreAccountQuery as ParentQ
 
 abstract class PersonQuery extends ParentQuery implements QueryInterface
 {
+    public function searchOptions() {
+        $result = parent::searchOptions();
+        $result['term']['fields'][] = 'personData.code';
+
+        return $result;
+    }
 }
