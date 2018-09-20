@@ -8,7 +8,7 @@ namespace Erp\Bundle\MasterBundle\Entity;
 class ProjectBoqBudgetType extends ProjectBoqObjectValue {
 
   /**
-   * @var ProejctBoq
+   * @var ProjectBoq
    */
   protected $boq;
 

@@ -14,7 +14,7 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 class PersonCorporateApiCommandController extends PersonApiCommand
 {
     /**
-     * @var \Erp\Bundle\MasgerBundle\Authorization\PersonCorporateAuthorization
+     * @var \Erp\Bundle\MasterBundle\Authorization\PersonCorporateAuthorization
      */
     protected $authorization = null;
 

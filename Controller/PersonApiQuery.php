@@ -10,7 +10,7 @@ use Erp\Bundle\CoreBundle\Controller\CoreAccountApiQuery;
 abstract class PersonApiQuery extends CoreAccountApiQuery
 {
     /**
-     * @var \Erp\Bundle\MasgerBundle\Authorization\AbstractPersonAuthorization
+     * @var \Erp\Bundle\MasterBundle\Authorization\AbstractPersonAuthorization
      */
     protected $authorization;
 

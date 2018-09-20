@@ -13,7 +13,7 @@ use FOS\RestBundle\Controller\Annotations as Rest;
  */
 class PersonApiQueryController extends PersonApiQuery {
     /**
-     * @var \Erp\Bundle\MasgerBundle\Authorization\PersonAuthorization
+     * @var \Erp\Bundle\MasterBundle\Authorization\PersonAuthorization
      */
     protected $authorization;
 
