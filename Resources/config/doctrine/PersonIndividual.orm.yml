@@ -3,15 +3,3 @@ Erp\Bundle\MasterBundle\Entity\PersonIndividual:
   #repositoryClass: Erp\Bundle\MasterBundle\Infrastructure\ORM\Repository\PersonIndividualRepository
   table: master_personindividual
   inheritanceType: JOINED
-  # oneToOne:
-  associationOverride:
-    personData:
-      targetEntity: Erp\Bundle\ObjectValueBundle\Entity\Citizen
-      orphanRemoval: true
-      cascade: ["persist", "merge"]
-      joinColumns:
-        joinColumn:
-          name: id_objectvalue_persondata
-          nullable: false
-          unique: true
-          onDelete: RESTRICT
