@@ -4,7 +4,6 @@ namespace Erp\Bundle\MasterBundle\Controller;
 
 use Erp\Bundle\CoreBundle\Controller\ErpApiQuery;
 
-use JMS\DiExtraBundle\Annotation as DI;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Psr\Http\Message\ServerRequestInterface;
 
