@@ -7,7 +7,7 @@ Erp\Bundle\MasterBundle\Entity\ProjectBoqDataBudget:
   fields:
     budget:
       type: decimal
-      precision: 10
+      precision: 12
       scale: 2
       nullable: false
   manyToOne:

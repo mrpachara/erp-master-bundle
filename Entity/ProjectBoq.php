@@ -26,6 +26,60 @@ class ProjectBoq extends ProjectBoqData implements StatusPresentable {
   protected $budgetTypes;
 
   /**
+   * boqContract
+   *
+   * @var string
+   */
+  protected $boqContract;
+  
+  /** @var \DateTimeImmutable */
+  protected $boqStartDate;
+  
+  /** @var \DateTimeImmutable */
+  protected $boqFinishDate;
+  
+  /**
+   * @param string $boqContract
+   *
+   * @return static
+   */
+  public function getBoqContract()
+    {
+        return $this->boqContract;
+    }
+
+public function setBoqContract(string $boqContract)
+    {
+        $this->boqContract = $boqContract;
+        return $this;
+    }
+  
+   /**
+    * @return \DateTimeImmutable
+    */
+public function getBoqStartDate()
+    {
+        return $this->boqStartDate;
+    }
+
+public function setBoqStartDate(?\DateTimeImmutable $boqStartDate)
+    {
+        $this->boqStartDate = $boqStartDate;
+    }
+   /**
+    * @return \DateTimeImmutable
+    */
+public function getBoqFinishDate()
+    {
+        return $this->boqFinishDate;
+    }
+
+public function setBoqFinishDate(?\DateTimeImmutable $boqFinishDate)
+    {
+        $this->boqFinishDate = $boqFinishDate;
+    }
+
+/**
    * constructor
    *
    * @var Project $project

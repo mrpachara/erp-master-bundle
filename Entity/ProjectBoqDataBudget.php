@@ -8,7 +8,7 @@ namespace Erp\Bundle\MasterBundle\Entity;
 class ProjectBoqDataBudget extends ProjectBoqObjectValue {
 
   /**
-   * obqData
+   * boqData
    *
    * @var ProjectBoqData
    */

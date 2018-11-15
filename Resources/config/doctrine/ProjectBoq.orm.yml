@@ -16,3 +16,15 @@ Erp\Bundle\MasterBundle\Entity\ProjectBoq:
       targetEntity: ProjectBoqBudgetType
       cascade: ["persist", "refresh"]
       mappedBy: boq
+  fields:
+    boqContract:
+      type: decimal
+      precision: 10
+      scale: 2
+      nullable: false
+    boqStartDate:
+      type: date_immutable
+      nullable: true
+    boqFinishDate:
+      type: date_immutable
+      nullable: true
