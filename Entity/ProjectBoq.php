@@ -39,6 +39,13 @@ class ProjectBoq extends ProjectBoqData implements StatusPresentable {
   protected $boqFinishDate;
   
   /**
+   * value
+   *
+   * @var array
+   */
+  public $value;
+  
+  /**
    * @param string $boqContract
    *
    * @return static
