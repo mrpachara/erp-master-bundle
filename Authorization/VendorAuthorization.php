@@ -7,22 +7,22 @@ use Erp\Bundle\CoreBundle\Authorization\AbstractCoreAccountAuthorization as Auth
 class VendorAuthorization extends Authorization
 {
     public function list(...$args) {
-        return parent::list(...$args) && $this->authorizationChecker->isGranted('ROLE_LIST_MASTER_VENDOR');
+        return parent::list(...$args) && $this->authorizationChecker->isGranted('ROLE_MASTER_VENDOR_LIST');
     }
 
     public function get(...$args) {
-        return parent::get(...$args) && $this->authorizationChecker->isGranted('ROLE_VIEW_MASTER_VENDOR');
+        return parent::get(...$args) && $this->authorizationChecker->isGranted('ROLE_MASTER_VENDOR_VIEW');
     }
 
     public function add(...$args) {
-        return parent::add(...$args) && $this->authorizationChecker->isGranted('ROLE_CREATE_MASTER_VENDOR');
+        return parent::add(...$args) && $this->authorizationChecker->isGranted('ROLE_MASTER_VENDOR_CREATE');
     }
 
     public function edit(...$args) {
-        return parent::edit(...$args) && $this->authorizationChecker->isGranted('ROLE_EDIT_MASTER_VENDOR');
+        return parent::edit(...$args) && $this->authorizationChecker->isGranted('ROLE_MASTER_VENDOR_EDIT');
     }
 
     public function delete(...$args) {
-        return parent::delete(...$args) && $this->authorizationChecker->isGranted('ROLE_DELETE_MASTER_VENDOR');
+        return parent::delete(...$args) && $this->authorizationChecker->isGranted('ROLE_MASTER_VENDOR_DELETE');
     }
 }

@@ -7,22 +7,22 @@ use Erp\Bundle\CoreBundle\Authorization\AbstractCoreAccountAuthorization as Auth
 class CostItemAuthorization extends Authorization
 {
     public function list(...$args) {
-        return parent::list(...$args) && $this->authorizationChecker->isGranted('ROLE_LIST_MASTER_COSTITEM');
+        return parent::list(...$args) && $this->authorizationChecker->isGranted('ROLE_MASTER_COSTITEM_LIST');
     }
 
     public function get(...$args) {
-        return parent::get(...$args) && $this->authorizationChecker->isGranted('ROLE_VIEW_MASTER_COSTITEM');
+        return parent::get(...$args) && $this->authorizationChecker->isGranted('ROLE_MASTER_COSTITEM_VIEW');
     }
 
     public function add(...$args) {
-        return parent::add(...$args) && $this->authorizationChecker->isGranted('ROLE_CREATE_MASTER_COSTITEM');
+        return parent::add(...$args) && $this->authorizationChecker->isGranted('ROLE_MASTER_COSTITEM_CREATE');
     }
 
     public function edit(...$args) {
-        return parent::edit(...$args) && $this->authorizationChecker->isGranted('ROLE_EDIT_MASTER_COSTITEM');
+        return parent::edit(...$args) && $this->authorizationChecker->isGranted('ROLE_MASTER_COSTITEM_EDIT');
     }
 
     public function delete(...$args) {
-        return parent::delete(...$args) && $this->authorizationChecker->isGranted('ROLE_DELETE_MASTER_COSTITEM');
+        return parent::delete(...$args) && $this->authorizationChecker->isGranted('ROLE_MASTER_COSTITEM_DELETE');
     }
 }
