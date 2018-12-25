@@ -100,6 +100,6 @@ class ProjectBoqDataBudget extends ProjectBoqObjectValue {
    */
   public function getBudget()
   {
-    return $this->budger;
+    return $this->budget;
   }
 }
