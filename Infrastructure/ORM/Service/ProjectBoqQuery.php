@@ -7,14 +7,4 @@ use Erp\Bundle\CoreBundle\Infrastructure\ORM\Service\ErpQuery as ParentQuery;
 
 abstract class ProjectBoqQuery extends ParentQuery implements QueryInterface
 {
-    public function searchOptions()
-    {
-        $result = parent::searchOptions();
-
-        $result['search']['fields'][] = ['name'];
-
-        $result['where']['fields'][] = ['project'];
-
-        return $result;
-    }
 }
