@@ -8,6 +8,7 @@ class PersonAuthorization extends AbstractPersonAuthorization
 
     public function addSelect(...$args)
     {
-        return true;
+        return parent::add(...$args) && $this->authorizationChecker->isGranted('ROLE_MASTER_PERSON_CREATE');
+       // return true;
     }
 }
