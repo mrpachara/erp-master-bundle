@@ -7,22 +7,22 @@ use Erp\Bundle\CoreBundle\Authorization\AbstractErpAuthorization as Authorizatio
 class ProjectBoqAuthorization extends Authorization
 {
     public function list(...$args) {
-        return parent::list(...$args) && $this->authorizationChecker->isGranted('ROLE_MASTER_PROJECT_BOQ_LIST');
+        return parent::list(...$args) && $this->authorizationChecker->isGranted('ROLE_MASTER_PROJECT_BUDGET_LIST');
     }
 
     public function get(...$args) {
-        return parent::get(...$args) && $this->authorizationChecker->isGranted('ROLE_MASTER_PROJECT_BOQ_VIEW');
+        return parent::get(...$args) && $this->authorizationChecker->isGranted('ROLE_MASTER_PROJECT_BUDGET_VIEW');
     }
 
     public function add(...$args) {
-        return parent::add(...$args) && $this->authorizationChecker->isGranted('ROLE_MASTER_PROJECT_BOQ_CREATE');
+        return parent::add(...$args) && $this->authorizationChecker->isGranted('ROLE_MASTER_PROJECT_BUDGET_CREATE');
     }
 
     public function edit(...$args) {
-        return parent::edit(...$args) && $this->authorizationChecker->isGranted('ROLE_MASTER_PROJECT_BOQ_EDIT');
+        return parent::edit(...$args) && $this->authorizationChecker->isGranted('ROLE_MASTER_PROJECT_BUDGET_EDIT');
     }
 
     public function delete(...$args) {
-        return parent::delete(...$args) && $this->authorizationChecker->isGranted('ROLE_MASTER_PROJECT_BOQ_DELETE');
+        return parent::delete(...$args) && $this->authorizationChecker->isGranted('ROLE_MASTER_PROJECT_BUDGET_DELETE');
     }
 }

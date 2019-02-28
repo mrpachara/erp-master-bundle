@@ -38,7 +38,7 @@ class ProjectApiQueryController extends CoreAccountApiQuery {
     protected function getResponse($data, $context)
     {
         $context = parent::getResponse($data, $context);
-        $context['links'][] = 'boq';
+        $context['links'][] = 'budget';
         return $context;
     }
 }
