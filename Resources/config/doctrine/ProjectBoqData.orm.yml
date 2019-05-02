@@ -25,6 +25,7 @@ Erp\Bundle\MasterBundle\Entity\ProjectBoqData:
       targetEntity: ProjectBoqData
       cascade: ["persist", "refresh"]
       mappedBy: parent
+      orphanRemoval: true
       orderBy:
         position: ASC
     budgets:

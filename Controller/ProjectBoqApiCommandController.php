@@ -7,6 +7,8 @@ use Erp\Bundle\CoreBundle\Controller\ErpApiCommand;
 use FOS\RestBundle\Controller\Annotations as Rest;
 
 use Symfony\Component\HttpFoundation\Request;
+use Erp\Bundle\CoreBundle\Domain\Adapter\LockMode;
+use Erp\Bundle\MasterBundle\Entity\ProjectBoq;
 
 /**
  * ProjectBoq Api CommandController
@@ -78,6 +80,26 @@ class ProjectBoqApiCommandController extends ErpApiCommand {
      */
     public function updateWithProjectAction($projectId, $id, Request $request)
     {
+//         $data = $this->extractData($request, self::FOR_UPDATE);
+        
+//        $item = $this->commandHandler->execute(function ($em) use ($projectId, $id, $data) {
+//            /**
+//             * @var ProjectBoq $item
+//             */
+//            $item = $this->domainQuery->findOneBy([ 'id' => $id, 'project' => $projectId ]);
+           
+//            /**
+//             * @var \Erp\Bundle\MasterBundle\Entity\ProjectBoqData $boq
+//             */
+//            $boq = $item->getChildren()[1];
+           
+//            $boq->removeChild($boq->getChildren()[1]);
+
+//             $em->lock($item, LockMode::PESSIMISTIC_WRITE);
+//             return $item;
+//         });
+            
+//         return $this->view(['data' => $this->domainQuery->find($item->getId())], 200);
         return $this->updateCommand('edit', $id, $request, function($id, &$data) use ($projectId) {
             $item = $this->domainQuery->findOneBy([ 'id' => $id, 'project' => $projectId ]);
 
@@ -97,7 +119,7 @@ class ProjectBoqApiCommandController extends ErpApiCommand {
      * @param Request $request
      */
     public function deleteWithProjectAction($projectId, $id, Request $request){
-        return $this->deleteCommand('delete', $id, $request, function($id) {
+        return $this->deleteCommand('delete', $id, $request, function($id) use ($projectId) {
             return $this->domainQuery->findOneBy([ 'id' => $id, 'project' => $projectId ]);
         });
     }

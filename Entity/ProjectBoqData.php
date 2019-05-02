@@ -104,12 +104,24 @@ class ProjectBoqData extends ProjectBoqObjectValue
         return $this;
     }
 
+    
+    private function prepareChildren()
+    {
+        if(null === $this->children) $this->children = new ArrayCollection();
+    }
+    
+    private function getChildrenArrayCollection()
+    {
+        $this->prepareChildren();
+        return $this->children;
+    }
+    
     /**
      * @return ProjectBoqData[]
      */
     public function getChildren()
     {
-        return $this->children->toArray();
+        return $this->getChildrenArrayCollection()->toArray();
     }
 
     /**
@@ -119,7 +131,7 @@ class ProjectBoqData extends ProjectBoqObjectValue
      */
     public function addChild(ProjectBoqData $projectBoqData)
     {
-        if (!$this->children->contains($projectBoqData)) {
+        if (!$this->getChildrenArrayCollection()->contains($projectBoqData)) {
             $this->children[] = $projectBoqData;
         }
 
@@ -131,9 +143,20 @@ class ProjectBoqData extends ProjectBoqObjectValue
      */
     public function removeChild(ProjectBoqData $projectBoqData)
     {
-        $this->children->removeElement($projectBoqData);
+        $this->getChildrenArrayCollection()->removeElement($projectBoqData);
     }
 
+    
+    public function setChildrenByArrayCollection($children)
+    {
+        foreach($this->getChildrenArrayCollection() as $child) {
+            if(!$children->contains($child)) $this->removeChild($child);
+        }
+        
+        foreach($children as $child) {
+            $this->addChild($child);
+        }
+    }
     /**
      * @return ProjectBoqDataBudget[]
      */
