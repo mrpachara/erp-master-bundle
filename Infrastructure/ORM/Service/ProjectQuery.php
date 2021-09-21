@@ -14,21 +14,19 @@ abstract class ProjectQuery extends ParentQuery implements QueryInterface
      *
      * @param Employee[] $workers
      */
-    public function someWorkersQueryBuilder(
+    public function memberOfWorkersQueryBuilder(
         string $alias,
         $workers
     ) : QueryBuilder
     {
         $qb = $this->createQueryBuilder($alias);
-        $orX = $qb->expr()->orX();
-        foreach($workers as $i => $worker) {
-            $orX->add(
-                $qb->expr()->isMemberOf(":{$alias}_worker_{$i}", "{$alias}.workers")
-            );
-            $qb->setParameter("{$alias}_worker_{$i}", $worker);
-        }
 
-        $qb->andWhere($orX);
+        $expr = $qb->expr();
+        $workersVar = "{$alias}_workers";
+        $qb
+            ->andWhere($expr->isMemberOf(":{$workersVar}", "{$alias}.workers"))
+            ->setParameter($workersVar, $workers)
+        ;
 
         return $qb;
     }
