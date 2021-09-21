@@ -64,7 +64,7 @@ class Project extends CoreAccount
     protected $bankAccounts;
 
     /**
-     * bank accounts
+     * workers
      *
      * @var ArrayCollection
      */
