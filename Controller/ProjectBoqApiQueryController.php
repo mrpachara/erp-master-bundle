@@ -47,14 +47,16 @@ class ProjectBoqApiQueryController extends ErpApiQuery
      */
     public function listByProjectAction($projectId, ServerRequestInterface $request)
     {
-        return $this->listQuery('list', $request, function ($queryParams, &$context) use ($projectId) {
-            if (!empty($queryParams)) {
-                $queryParams['where:project'] = $projectId;
-                return $this->domainQuery->search($queryParams, $context);
-            } else {
-                return $this->domainQuery->findByProject($projectId);
-            }
-        });
+        return $this->listQuery($request, [
+            'list' => function ($queryParams, &$context) use ($projectId) {
+                if (!empty($queryParams)) {
+                    $queryParams['where:project'] = $projectId;
+                    return $this->domainQuery->search($queryParams, $context);
+                } else {
+                    return $this->domainQuery->findByProject($projectId);
+                }
+            },
+        ]);
     }
 
     /**
@@ -68,8 +70,10 @@ class ProjectBoqApiQueryController extends ErpApiQuery
      */
     public function getByProjectAction($projectId, $id, ServerRequestInterface $request)
     {
-        return $this->getQuery('get', $id, $request, function ($id, $queryParams, &$context) use ($projectId) {
-            return $this->domainQuery->findOneBy(['id' => $id, 'project' => $projectId]);
-        });
+        return $this->getQuery($id, $request, [
+            'get' => function ($id, $queryParams, &$context) use ($projectId) {
+                return $this->domainQuery->findOneBy(['id' => $id, 'project' => $projectId]);
+            },
+        ]);
     }
 }
