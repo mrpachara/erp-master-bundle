@@ -60,13 +60,15 @@ class ProjectBoqApiCommandController extends ErpApiCommand {
      */
     public function createWithProjectAction($projectId, Request $request)
     {
-        return $this->createCommand('add', $request, function($class, &$data) use ($projectId) {
-            $item = new $class();
+        return $this->createCommand($request, [
+            'add' => function($class, &$data) use ($projectId) {
+                $item = new $class();
 
-            $data['project'] = ['id' => $projectId, 'dtype' => 'project'];
+                $data['project'] = ['id' => $projectId, 'dtype' => 'project'];
 
-            return $item;
-        });
+                return $item;
+            },
+        ]);
     }
 
     /**
@@ -80,33 +82,15 @@ class ProjectBoqApiCommandController extends ErpApiCommand {
      */
     public function updateWithProjectAction($projectId, $id, Request $request)
     {
-//         $data = $this->extractData($request, self::FOR_UPDATE);
-        
-//        $item = $this->commandHandler->execute(function ($em) use ($projectId, $id, $data) {
-//            /**
-//             * @var ProjectBoq $item
-//             */
-//            $item = $this->domainQuery->findOneBy([ 'id' => $id, 'project' => $projectId ]);
-           
-//            /**
-//             * @var \Erp\Bundle\MasterBundle\Entity\ProjectBoqData $boq
-//             */
-//            $boq = $item->getChildren()[1];
-           
-//            $boq->removeChild($boq->getChildren()[1]);
+        return $this->updateCommand($id, $request, [
+            'edit' => function($id, &$data) use ($projectId) {
+                $item = $this->domainQuery->findOneBy([ 'id' => $id, 'project' => $projectId ]);
 
-//             $em->lock($item, LockMode::PESSIMISTIC_WRITE);
-//             return $item;
-//         });
-            
-//         return $this->view(['data' => $this->domainQuery->find($item->getId())], 200);
-        return $this->updateCommand('edit', $id, $request, function($id, &$data) use ($projectId) {
-            $item = $this->domainQuery->findOneBy([ 'id' => $id, 'project' => $projectId ]);
+                $data['project'] = ['id' => $projectId, 'dtype' => 'project'];
 
-            $data['project'] = ['id' => $projectId, 'dtype' => 'project'];
-
-            return $item;
-        });
+                return $item;
+            },
+        ]);
     }
 
     /**
@@ -119,8 +103,10 @@ class ProjectBoqApiCommandController extends ErpApiCommand {
      * @param Request $request
      */
     public function deleteWithProjectAction($projectId, $id, Request $request){
-        return $this->deleteCommand('delete', $id, $request, function($id) use ($projectId) {
-            return $this->domainQuery->findOneBy([ 'id' => $id, 'project' => $projectId ]);
-        });
+        return $this->deleteCommand($id, $request, [
+            'delete' => function($id) use ($projectId) {
+                return $this->domainQuery->findOneBy([ 'id' => $id, 'project' => $projectId ]);
+            },
+        ]);
     }
 }
