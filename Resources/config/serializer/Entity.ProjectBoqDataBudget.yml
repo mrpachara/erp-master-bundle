@@ -7,3 +7,5 @@ Erp\Bundle\MasterBundle\Entity\ProjectBoqDataBudget:
       type: Erp\Bundle\MasterBundle\Entity\ProjectBoqBudgetType
     budget:
       type: string
+    cost:
+      type: array
