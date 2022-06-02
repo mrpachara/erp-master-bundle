@@ -17,16 +17,17 @@ abstract class ProjectQuery extends ParentQuery implements QueryInterface
     public function memberOfWorkersQueryBuilder(
         string $alias,
         $workers
-    ) : QueryBuilder
-    {
+    ): QueryBuilder {
         $qb = $this->createQueryBuilder($alias);
 
         $expr = $qb->expr();
         $workersVar = "{$alias}_workers";
+        $workerIds = \array_map(function (Employee $employee) {
+            return (string) $employee->getId();
+        }, $workers);
         $qb
             ->andWhere($expr->isMemberOf(":{$workersVar}", "{$alias}.workers"))
-            ->setParameter($workersVar, $workers)
-        ;
+            ->setParameter($workersVar, $workerIds);
 
         return $qb;
     }
