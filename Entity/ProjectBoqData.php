@@ -10,11 +10,11 @@ use Erp\Bundle\CoreBundle\Collection\ArrayCollection;
 class ProjectBoqData extends ProjectBoqObjectValue
 {
 
-  /**
-   * name
-   *
-   * @var string
-   */
+    /**
+     * name
+     *
+     * @var string
+     */
     protected $name;
 
     /**
@@ -104,18 +104,18 @@ class ProjectBoqData extends ProjectBoqObjectValue
         return $this;
     }
 
-    
+
     private function prepareChildren()
     {
-        if(null === $this->children) $this->children = new ArrayCollection();
+        if (null === $this->children) $this->children = new ArrayCollection();
     }
-    
+
     private function getChildrenArrayCollection()
     {
         $this->prepareChildren();
         return $this->children;
     }
-    
+
     /**
      * @return ProjectBoqData[]
      */
@@ -146,14 +146,13 @@ class ProjectBoqData extends ProjectBoqObjectValue
         $this->getChildrenArrayCollection()->removeElement($projectBoqData);
     }
 
-    
     public function setChildrenByArrayCollection($children)
     {
-        foreach($this->getChildrenArrayCollection() as $child) {
-            if(!$children->contains($child)) $this->removeChild($child);
+        foreach ($this->getChildrenArrayCollection() as $child) {
+            if (!$children->contains($child)) $this->removeChild($child);
         }
-        
-        foreach($children as $child) {
+
+        foreach ($children as $child) {
             $this->addChild($child);
         }
     }
@@ -185,6 +184,14 @@ class ProjectBoqData extends ProjectBoqObjectValue
     public function removeBudget(ProjectBoqDataBudget $budget)
     {
         $this->budgets->removeElement($budget);
+    }
+
+    public function emptyBudget()
+    {
+        /** @var ProjectBoqDataBudget $budget */
+        foreach ($this->budgets as $budget) {
+            $budget->setBudget('');
+        }
     }
 
     /**

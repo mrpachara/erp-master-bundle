@@ -3,7 +3,8 @@
 namespace Erp\Bundle\MasterBundle\Controller;
 
 use Erp\Bundle\CoreBundle\Controller\ErpApiQuery;
-
+use Erp\Bundle\MasterBundle\Entity\ProjectBoq;
+use Erp\Bundle\MasterBundle\Entity\ProjectBoqData;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -38,6 +39,33 @@ class ProjectBoqApiQueryController extends ErpApiQuery
     }
 
     /**
+     * Empty all budgets.
+     *
+     * @param ProjectBoqData[] $boqs
+     */
+    private function emptyBudget($boqs): void
+    {
+        $passed = [];
+        $queue = [...$boqs];
+        while ($boq = \array_shift($queue)) {
+            $boq->emptyBudget();
+            \array_push($passed, $boq);
+            foreach ($boq->getChildren() as $child) {
+                if (!\in_array($child, $passed, true)) {
+                    \array_push($queue, $child);
+                }
+            }
+        }
+    }
+
+    /** {@inheritDoc} */
+    protected function extendGetContext(array $context): array
+    {
+        $context['actions'][] = 'print';
+        return $context;
+    }
+
+    /**
      * list action
      *
      * @Rest\Get("")
@@ -49,12 +77,22 @@ class ProjectBoqApiQueryController extends ErpApiQuery
     {
         return $this->listQuery($request, [
             'list' => function ($queryParams, &$context) use ($projectId) {
-                if (!empty($queryParams)) {
-                    $queryParams['where:project'] = $projectId;
-                    return $this->domainQuery->search($queryParams, $context);
-                } else {
-                    return $this->domainQuery->findByProject($projectId);
+                // if (!empty($queryParams)) {
+                //     $queryParams['where:project'] = $projectId;
+                //     return $this->domainQuery->search($queryParams, $context);
+                // } else {
+                //     return $this->domainQuery->findByProject($projectId);
+                // }
+                $context['searchable'] = false;
+
+                /** @var ProjectBoq[] $boqs */
+                $boqs = $this->domainQuery->findByProject($projectId);
+
+                if (!$this->authorization->viewValue()) {
+                    $this->emptyBudget($boqs);
                 }
+
+                return $boqs;
             },
         ]);
     }
@@ -72,7 +110,13 @@ class ProjectBoqApiQueryController extends ErpApiQuery
     {
         return $this->getQuery($id, $request, [
             'get' => function ($id, $queryParams, &$context) use ($projectId) {
-                return $this->domainQuery->findOneBy(['id' => $id, 'project' => $projectId]);
+                $boq = $this->domainQuery->findOneBy(['id' => $id, 'project' => $projectId]);
+
+                if (!$this->authorization->viewValue()) {
+                    $this->emptyBudget([$boq]);
+                }
+
+                return $boq;
             },
         ]);
     }
